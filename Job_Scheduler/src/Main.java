@@ -32,7 +32,7 @@ public class Main {
 //        scheduler.printContents();
 
         // Start the Scheduler
-        scheduler.schedule();
+        scheduler.start();
 
         // TODO: Output the results to output.txt
     }

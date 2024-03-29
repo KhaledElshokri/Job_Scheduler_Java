@@ -1,9 +1,12 @@
+import java.util.ArrayList;
+
 class Process extends Thread {
     private final int mId;
     private final int mArrivalTime;
     private int mBurstTime;
     private int mRemainingTime;
     private int mWaitingTime;
+    private ArrayList<Boolean> flagArrayReference;
 
     public Process(int iId, int iArrivalTime, int iBurstTime)
     {
@@ -19,16 +22,40 @@ class Process extends Thread {
     {
         //sleep to simulate computation time
         try {
-            int quantum = (int) Math.ceil(this.mRemainingTime * 0.1);
-            Thread.sleep(quantum);
-            this.mRemainingTime -= quantum;
+            while(mRemainingTime != 0) {
+                System.out.println("db process: pre waitForFlagChange() (Process " + this.mId + " ).");
+                waitForFlagChange();
+                System.out.println("db process: post waitForFlagChange() (Process " + this.mId + " ).");
+                System.out.println("Process " + this.mId + " has resumed. ");
+                int quantum = (int) Math.ceil(this.mRemainingTime * 0.1);
+                Thread.sleep(quantum);
+                this.mRemainingTime -= quantum;
+                System.out.println("Process " + this.mId + " has paused. ");
+            }
 
-            // TODO: Notify the scheduler if the process is finished or needs more time
-            Scheduler.flag = true;
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             e.printStackTrace();
         }
+    }
+
+    public synchronized void makeWait() {
+        try {
+            wait();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public synchronized void waitForFlagChange() {
+        while (!flagArrayReference.get(this.mId)) {
+            try {
+                wait(); // Wait until flag changes
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        // Flag has changed, do something
     }
 
     public int getIds()
@@ -65,5 +92,10 @@ class Process extends Thread {
     {
         return mArrivalTime + mBurstTime + mWaitingTime;
     }
+
+    public void setFlagArrayReference(ArrayList<Boolean> flagArray) {
+        this.flagArrayReference = flagArray;
+    }
+
 }
 
