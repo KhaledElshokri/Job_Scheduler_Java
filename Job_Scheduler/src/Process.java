@@ -6,6 +6,7 @@ class Process extends Thread {
     private int mBurstTime;
     private int mRemainingTime;
     private int mWaitingTime;
+    private int mCurrentTime;
     private ArrayList<Boolean> flagArrayReference;
 
     public Process(int iId, int iArrivalTime, int iBurstTime)
@@ -22,16 +23,27 @@ class Process extends Thread {
     {
         //sleep to simulate computation time
         try {
+            setWaitingTime(mCurrentTime);
+            Thread.sleep(10);
             while(mRemainingTime != 0) {
-                System.out.println("db process: pre waitForFlagChange() (Process " + this.mId + " ).");
+                mCurrentTime++;
+//                System.out.println("db process: pre waitForFlagChange() (Process " + this.mId + " ).");
+//                System.out.println("db process: pre waitForFlagChange() : " + flagArrayReference);
                 waitForFlagChange();
-                System.out.println("db process: post waitForFlagChange() (Process " + this.mId + " ).");
-                System.out.println("Process " + this.mId + " has resumed. ");
+//                System.out.println("db process: post waitForFlagChange() : " + flagArrayReference);
+//                System.out.println("db process: post waitForFlagChange() (Process " + this.mId + " ).");
+                System.out.println("Time " + this.mCurrentTime + ", Process " + this.mId + " has resumed. ");
                 int quantum = (int) Math.ceil(this.mRemainingTime * 0.1);
                 Thread.sleep(quantum);
                 this.mRemainingTime -= quantum;
-                System.out.println("Process " + this.mId + " has paused. ");
+//                System.out.println("db process: remaining time: "+ this.mRemainingTime);
+                System.out.println("Time " + this.mCurrentTime + ", Process " + this.mId + " has paused. ");
+                if(this.mRemainingTime == 0){
+//                    System.out.println("db process: break, mRemainingTime==0");
+                    break;
+                }
             }
+            System.out.println("Time " + this.mCurrentTime + ", Process " + this.mId + " has finished. ");
 
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -39,23 +51,30 @@ class Process extends Thread {
         }
     }
 
-    public synchronized void makeWait() {
-        try {
-            wait();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public synchronized void waitForFlagChange() {
-        while (!flagArrayReference.get(this.mId)) {
+        while (!flagArrayReference.get(this.mId-1)) {
             try {
+//                System.out.println("db process: go inside of wait");
                 wait(); // Wait until flag changes
+//                System.out.println("db process: breaks out of wait");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+//        flagArrayReference.set(this.mId-1, false);
         // Flag has changed, do something
+    }
+
+    public void setFlagArrayReference(ArrayList<Boolean> flagArray) {
+        this.flagArrayReference = flagArray;
+    }
+
+    public void setCurrentTime(int time){
+        this.mCurrentTime = time;
+    }
+
+    public int getCurrentTime(){
+        return mCurrentTime;
     }
 
     public int getIds()
@@ -93,9 +112,7 @@ class Process extends Thread {
         return mArrivalTime + mBurstTime + mWaitingTime;
     }
 
-    public void setFlagArrayReference(ArrayList<Boolean> flagArray) {
-        this.flagArrayReference = flagArray;
-    }
+
 
 }
 
