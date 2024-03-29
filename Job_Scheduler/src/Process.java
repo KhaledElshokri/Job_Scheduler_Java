@@ -22,16 +22,19 @@ class Process extends Thread {
     {
         //sleep to simulate computation time
         try {
-            while(mRemainingTime != 0) {
-                System.out.println("db process: pre waitForFlagChange() (Process " + this.mId + " ).");
+                Thread.sleep(1000);
+//            while(mRemainingTime != 0) {
+//                System.out.println("db process: pre waitForFlagChange() (Process " + this.mId + " ).");
                 waitForFlagChange();
-                System.out.println("db process: post waitForFlagChange() (Process " + this.mId + " ).");
+//                System.out.println("db process: post waitForFlagChange() (Process " + this.mId + " ).");
                 System.out.println("Process " + this.mId + " has resumed. ");
                 int quantum = (int) Math.ceil(this.mRemainingTime * 0.1);
                 Thread.sleep(quantum);
                 this.mRemainingTime -= quantum;
+                System.out.println("db process: remaining time: "+ this.mRemainingTime);
                 System.out.println("Process " + this.mId + " has paused. ");
-            }
+                //TODO: give up cpu to next process
+//            }
 
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -40,11 +43,11 @@ class Process extends Thread {
     }
 
     public synchronized void waitForFlagChange() {
-        while (!flagArrayReference.get(this.mId)) {
+        while (!flagArrayReference.get(this.mId-1)) {
             try {
-                System.out.println("db process: go inside of wait");
+//                System.out.println("db process: go inside of wait");
                 wait(); // Wait until flag changes
-                System.out.println("db process: breaks out of wait");
+//                System.out.println("db process: breaks out of wait");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

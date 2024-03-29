@@ -1,19 +1,17 @@
-import java.sql.Array;
 import java.util.PriorityQueue;
 import java.util.Comparator;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 class ProcessComparator implements Comparator<Process> {
     @Override
     public int compare(Process p1, Process p2) {
         // Compare burst times
-        int burstTimeComparison = Integer.compare(p1.getBurstTime(), p2.getBurstTime());
+        int remainingTimeComparison = Integer.compare(p1.getRemainingTime(), p2.getRemainingTime());
 
         // If burst times are different, return the comparison result
-        if (burstTimeComparison != 0) {
+        if (remainingTimeComparison != 0) {
             // Reverse the comparison by negating the burst times
-            return burstTimeComparison;
+            return remainingTimeComparison;
         } else {
             // If burst times are equal, compare arrival times
             int arrivalTimeComparison = Integer.compare(p1.getArrivalTime(), p2.getArrivalTime());
@@ -49,7 +47,13 @@ class Scheduler extends Thread{
     public void run() {
         // Main scheduling loop
         while (!mProcessQueue.isEmpty()) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             Process currentProcess = mProcessQueue.poll();
+            System.out.println("db scheduler: Poll from process queue");
 
             if(startedArray.get(currentProcess.getIds()-1) == false){
                 System.out.println("Process " + currentProcess.getIds() + " has started.");
@@ -57,16 +61,10 @@ class Scheduler extends Thread{
                 startedArray.set(currentProcess.getIds()-1, true);
             }
 
-            try {
-                Thread.sleep(3000);
-                setFlag(currentProcess, true);
-                System.out.println("db scheduler: pre join()");
-                currentProcess.join(); // Wait for the process to finish execution
-                System.out.println("db scheduler: post join()");
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                e.printStackTrace();
-            }
+
+            setFlag(currentProcess, true);
+            System.out.println("db scheduler: post setFlag()");
+
 
             // Update waiting times and handle process completion
             int currentTime = Math.max(currentProcess.getArrivalTime(), currentProcess.getFinishTime());
@@ -76,16 +74,28 @@ class Scheduler extends Thread{
 
             if (currentProcess.getRemainingTime() == 0) {
                 System.out.println("Process " + currentProcess.getIds() + " completed execution.");
-            } else mProcessQueue.add(currentProcess);
+                try{
+                    currentProcess.join();
+                }catch(InterruptedException e){
+                    Thread.currentThread().interrupt();
+                    e.printStackTrace();
+                }
+            } else {
+                try{
+                    currentProcess.join();
+                }catch(InterruptedException e){};
+                mProcessQueue.add(currentProcess);
+            }
+
         }
     }
 
     public synchronized void setFlag(Process currentProcess, boolean value) {
-        System.out.println("db scheduler: pre setFlag()");
+//        System.out.println("db scheduler: pre setFlag()");
         flagArray.set(currentProcess.getIds()-1, value);
-        System.out.println("db scheduler: post setFlag()");
-        System.out.println("db scheduler: pre notifyAll()");
+//        System.out.println("db scheduler: post setFlag()");
+//        System.out.println("db scheduler: pre notifyAll()");
         notifyAll(); // Notify all waiting threads that flag has changed
-        System.out.println("db scheduler: post notifyAll()");
+//        System.out.println("db scheduler: post notifyAll()");
     }
 }
