@@ -22,19 +22,24 @@ class Process extends Thread {
     {
         //sleep to simulate computation time
         try {
-                Thread.sleep(1000);
-//            while(mRemainingTime != 0) {
+                Thread.sleep(10);
+            while(mRemainingTime != 0) {
 //                System.out.println("db process: pre waitForFlagChange() (Process " + this.mId + " ).");
+//                System.out.println("db process: pre waitForFlagChange() : " + flagArrayReference);
                 waitForFlagChange();
+//                System.out.println("db process: post waitForFlagChange() : " + flagArrayReference);
 //                System.out.println("db process: post waitForFlagChange() (Process " + this.mId + " ).");
                 System.out.println("Process " + this.mId + " has resumed. ");
                 int quantum = (int) Math.ceil(this.mRemainingTime * 0.1);
                 Thread.sleep(quantum);
                 this.mRemainingTime -= quantum;
-                System.out.println("db process: remaining time: "+ this.mRemainingTime);
+//                System.out.println("db process: remaining time: "+ this.mRemainingTime);
                 System.out.println("Process " + this.mId + " has paused. ");
-                //TODO: give up cpu to next process
-//            }
+                if(this.mRemainingTime == 0){
+//                    System.out.println("db process: break, mRemainingTime==0");
+                    break;
+                }
+            }
 
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -52,6 +57,7 @@ class Process extends Thread {
                 e.printStackTrace();
             }
         }
+//        flagArrayReference.set(this.mId-1, false);
         // Flag has changed, do something
     }
 

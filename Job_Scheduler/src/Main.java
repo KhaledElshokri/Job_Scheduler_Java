@@ -11,7 +11,7 @@ import java.util.*;
 */
 
 public class Main {
-    static String fileName = "C:\\khaled\\CU\\Winter 2024\\Coen 346\\Job_Scheduler_Java\\Job_Scheduler\\src\\input.txt";
+    static String fileName = "C:\\Users\\kyler\\OneDrive\\Desktop\\Programming\\JobScheduler\\Job_Scheduler\\src\\input.txt";
 
     public static void main(String[] args)
     {
