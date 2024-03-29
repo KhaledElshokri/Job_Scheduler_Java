@@ -58,6 +58,7 @@ class Scheduler extends Thread{
             }
 
             try {
+                Thread.sleep(3000);
                 setFlag(currentProcess, true);
                 System.out.println("db scheduler: pre join()");
                 currentProcess.join(); // Wait for the process to finish execution
@@ -87,6 +88,4 @@ class Scheduler extends Thread{
         notifyAll(); // Notify all waiting threads that flag has changed
         System.out.println("db scheduler: post notifyAll()");
     }
-
-
 }

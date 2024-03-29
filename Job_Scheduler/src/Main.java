@@ -29,8 +29,6 @@ public class Main {
             scheduler.addProcess(wProcesses.get(i));
         }
 
-//        scheduler.printContents();
-
         // Start the Scheduler
         scheduler.start();
 

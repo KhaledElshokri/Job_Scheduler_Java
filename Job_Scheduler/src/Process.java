@@ -39,23 +39,21 @@ class Process extends Thread {
         }
     }
 
-    public synchronized void makeWait() {
-        try {
-            wait();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public synchronized void waitForFlagChange() {
         while (!flagArrayReference.get(this.mId)) {
             try {
+                System.out.println("db process: go inside of wait");
                 wait(); // Wait until flag changes
+                System.out.println("db process: breaks out of wait");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         // Flag has changed, do something
+    }
+
+    public void setFlagArrayReference(ArrayList<Boolean> flagArray) {
+        this.flagArrayReference = flagArray;
     }
 
     public int getIds()
@@ -93,9 +91,7 @@ class Process extends Thread {
         return mArrivalTime + mBurstTime + mWaitingTime;
     }
 
-    public void setFlagArrayReference(ArrayList<Boolean> flagArray) {
-        this.flagArrayReference = flagArray;
-    }
+
 
 }
 
