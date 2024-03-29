@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 /*      input format
@@ -15,24 +12,39 @@ public class Main {
 
     public static void main(String[] args)
     {
-        System.out.println("Running process scheduler!");
+        PrintStream originalOut = System.out;
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(".\\src\\output.txt");
+            PrintStream newOut = new PrintStream(new BufferedOutputStream(fileOutputStream), true);
+            System.setOut(newOut);
 
-        // Read input file to create Process objects
-        //starts at index 0
-        List<Process> wProcesses = readProcessesFromFile(fileName);
+            System.out.println("Running process scheduler!");
 
-        // Initialize the Scheduler and add processes to it
-        Scheduler scheduler = new Scheduler();
+            // Read input file to create Process objects
+            //starts at index 0
+            List<Process> wProcesses = readProcessesFromFile(fileName);
 
-        for(int i = 0; i < wProcesses.size(); i++)
-        {
-            scheduler.addProcess(wProcesses.get(i));
+            // Initialize the Scheduler and add processes to it
+            Scheduler scheduler = new Scheduler();
+
+            for(int i = 0; i < wProcesses.size(); i++)
+            {
+                scheduler.addProcess(wProcesses.get(i));
+            }
+
+            // Start the Scheduler
+            scheduler.start();
+            try {
+                scheduler.join();
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
+
+            fileOutputStream.close();
+        }catch(IOException e){
+            e.printStackTrace();
         }
 
-        // Start the Scheduler
-        scheduler.start();
-
-        // TODO: Output the results to output.txt
     }
 
     private static List<Process> readProcessesFromFile(String fileName)

@@ -1,0 +1,139 @@
+Running process scheduler!
+Time 0, Process 3 has started.
+Time 1, Process 3 has resumed. 
+Time 1, Process 3 has paused. 
+Time 1, Process 3 has finished. 
+Time 1, Process 8 has started.
+Time 2, Process 8 has resumed. 
+Time 2, Process 8 has paused. 
+Time 3, Process 8 has resumed. 
+Time 3, Process 8 has paused. 
+Time 3, Process 8 has finished. 
+Time 3, Process 5 has started.
+Time 4, Process 5 has resumed. 
+Time 4, Process 5 has paused. 
+Time 5, Process 5 has resumed. 
+Time 5, Process 5 has paused. 
+Time 6, Process 5 has resumed. 
+Time 6, Process 5 has paused. 
+Time 6, Process 5 has finished. 
+Time 6, Process 2 has started.
+Time 7, Process 2 has resumed. 
+Time 7, Process 2 has paused. 
+Time 8, Process 2 has resumed. 
+Time 8, Process 2 has paused. 
+Time 9, Process 2 has resumed. 
+Time 9, Process 2 has paused. 
+Time 9, Process 2 has finished. 
+Time 9, Process 10 has started.
+Time 10, Process 10 has resumed. 
+Time 10, Process 10 has paused. 
+Time 11, Process 10 has resumed. 
+Time 11, Process 10 has paused. 
+Time 12, Process 10 has resumed. 
+Time 12, Process 10 has paused. 
+Time 13, Process 10 has resumed. 
+Time 13, Process 10 has paused. 
+Time 14, Process 10 has resumed. 
+Time 14, Process 10 has paused. 
+Time 14, Process 10 has finished. 
+Time 14, Process 1 has started.
+Time 15, Process 1 has resumed. 
+Time 15, Process 1 has paused. 
+Time 16, Process 1 has resumed. 
+Time 16, Process 1 has paused. 
+Time 17, Process 1 has resumed. 
+Time 17, Process 1 has paused. 
+Time 18, Process 1 has resumed. 
+Time 18, Process 1 has paused. 
+Time 19, Process 1 has resumed. 
+Time 19, Process 1 has paused. 
+Time 19, Process 1 has finished. 
+Time 19, Process 4 has started.
+Time 20, Process 4 has resumed. 
+Time 20, Process 4 has paused. 
+Time 21, Process 4 has resumed. 
+Time 21, Process 4 has paused. 
+Time 22, Process 4 has resumed. 
+Time 22, Process 4 has paused. 
+Time 23, Process 4 has resumed. 
+Time 23, Process 4 has paused. 
+Time 24, Process 4 has resumed. 
+Time 24, Process 4 has paused. 
+Time 25, Process 4 has resumed. 
+Time 25, Process 4 has paused. 
+Time 26, Process 4 has resumed. 
+Time 26, Process 4 has paused. 
+Time 26, Process 4 has finished. 
+Time 26, Process 6 has started.
+Time 27, Process 6 has resumed. 
+Time 27, Process 6 has paused. 
+Time 28, Process 6 has resumed. 
+Time 28, Process 6 has paused. 
+Time 29, Process 6 has resumed. 
+Time 29, Process 6 has paused. 
+Time 30, Process 6 has resumed. 
+Time 30, Process 6 has paused. 
+Time 31, Process 6 has resumed. 
+Time 31, Process 6 has paused. 
+Time 32, Process 6 has resumed. 
+Time 32, Process 6 has paused. 
+Time 33, Process 6 has resumed. 
+Time 33, Process 6 has paused. 
+Time 34, Process 6 has resumed. 
+Time 34, Process 6 has paused. 
+Time 34, Process 6 has finished. 
+Time 34, Process 7 has started.
+Time 35, Process 7 has resumed. 
+Time 35, Process 7 has paused. 
+Time 36, Process 7 has resumed. 
+Time 36, Process 7 has paused. 
+Time 37, Process 7 has resumed. 
+Time 37, Process 7 has paused. 
+Time 38, Process 7 has resumed. 
+Time 38, Process 7 has paused. 
+Time 39, Process 7 has resumed. 
+Time 39, Process 7 has paused. 
+Time 40, Process 7 has resumed. 
+Time 40, Process 7 has paused. 
+Time 41, Process 7 has resumed. 
+Time 41, Process 7 has paused. 
+Time 42, Process 7 has resumed. 
+Time 42, Process 7 has paused. 
+Time 43, Process 7 has resumed. 
+Time 43, Process 7 has paused. 
+Time 43, Process 7 has finished. 
+Time 43, Process 9 has started.
+Time 44, Process 9 has resumed. 
+Time 44, Process 9 has paused. 
+Time 45, Process 9 has resumed. 
+Time 45, Process 9 has paused. 
+Time 46, Process 9 has resumed. 
+Time 46, Process 9 has paused. 
+Time 47, Process 9 has resumed. 
+Time 47, Process 9 has paused. 
+Time 48, Process 9 has resumed. 
+Time 48, Process 9 has paused. 
+Time 49, Process 9 has resumed. 
+Time 49, Process 9 has paused. 
+Time 50, Process 9 has resumed. 
+Time 50, Process 9 has paused. 
+Time 51, Process 9 has resumed. 
+Time 51, Process 9 has paused. 
+Time 52, Process 9 has resumed. 
+Time 52, Process 9 has paused. 
+Time 53, Process 9 has resumed. 
+Time 53, Process 9 has paused. 
+Time 53, Process 9 has finished. 
+----------------------------
+Waiting Times: 
+Process 1: 14
+Process 2: 6
+Process 3: 0
+Process 4: 19
+Process 5: 3
+Process 6: 26
+Process 7: 34
+Process 8: 1
+Process 9: 43
+Process 10: 9
