@@ -1,0 +1,56 @@
+Running process scheduler!
+Time 0, Process 3 has started.
+Time 1, Process 3 has resumed. 
+Time 1, Process 3 has paused. 
+Time 1, Process 3 has finished. 
+Time 1, Process 5 has started.
+Time 2, Process 5 has resumed. 
+Time 2, Process 5 has paused. 
+Time 3, Process 5 has resumed. 
+Time 3, Process 5 has paused. 
+Time 4, Process 5 has resumed. 
+Time 4, Process 5 has paused. 
+Time 4, Process 5 has finished. 
+Time 4, Process 2 has started.
+Time 5, Process 2 has resumed. 
+Time 5, Process 2 has paused. 
+Time 6, Process 2 has resumed. 
+Time 6, Process 2 has paused. 
+Time 7, Process 2 has resumed. 
+Time 7, Process 2 has paused. 
+Time 7, Process 2 has finished. 
+Time 7, Process 1 has started.
+Time 8, Process 1 has resumed. 
+Time 8, Process 1 has paused. 
+Time 9, Process 1 has resumed. 
+Time 9, Process 1 has paused. 
+Time 10, Process 1 has resumed. 
+Time 10, Process 1 has paused. 
+Time 11, Process 1 has resumed. 
+Time 11, Process 1 has paused. 
+Time 12, Process 1 has resumed. 
+Time 12, Process 1 has paused. 
+Time 12, Process 1 has finished. 
+Time 12, Process 4 has started.
+Time 13, Process 4 has resumed. 
+Time 13, Process 4 has paused. 
+Time 14, Process 4 has resumed. 
+Time 14, Process 4 has paused. 
+Time 15, Process 4 has resumed. 
+Time 15, Process 4 has paused. 
+Time 16, Process 4 has resumed. 
+Time 16, Process 4 has paused. 
+Time 17, Process 4 has resumed. 
+Time 17, Process 4 has paused. 
+Time 18, Process 4 has resumed. 
+Time 18, Process 4 has paused. 
+Time 19, Process 4 has resumed. 
+Time 19, Process 4 has paused. 
+Time 19, Process 4 has finished. 
+----------------------------
+Waiting Times: 
+Process 1: 7
+Process 2: 4
+Process 3: 0
+Process 4: 12
+Process 5: 1
